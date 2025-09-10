@@ -158,8 +158,11 @@ display:flex;
                     boxes[b].style.background = "rgb(255, 17, 17)"
                     boxes[c].style.background = "rgb(255, 17, 17)"
                     turn = (turn == "X") ? "O" : "X"
+                    
                     winner.innerText = `player ${turn} Wins 🏆`
-                proceed()
+                        setTimeout(()=>{
+                        proceed()
+                    },2000)
 
                     for (let i = 0; i < 9; i++) {
                         boxes[i].onclick = null
@@ -173,14 +176,16 @@ display:flex;
             winner.innerText = text
             if (count >= 9) {
                 winner.innerText = "It's a draw 😅"
-                alert("It's a draw")
-                proceed()
+                alert("It's a draw") 
+                    setTimeout(()=>{
+                        proceed()
+                    },2000)
             }
         }
        const proceed = () =>{
 document.getElementById("container").style.display = "none"
 document.getElementById("container2").style.display = "flex"
-
+alert(`player ${turn} Wins 🏆`)
        }
 
     </script>
