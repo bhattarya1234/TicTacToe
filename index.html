@@ -160,7 +160,10 @@ display:flex;
                     turn = (turn == "X") ? "O" : "X"
                     
                     winner.innerText = `player ${turn} Wins 🏆`
+
                         setTimeout(()=>{
+alert(`player ${turn} Wins 🏆`)
+
                         proceed()
                     },2000)
 
@@ -185,7 +188,6 @@ display:flex;
        const proceed = () =>{
 document.getElementById("container").style.display = "none"
 document.getElementById("container2").style.display = "flex"
-alert(`player ${turn} Wins 🏆`)
        }
 
     </script>
