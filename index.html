@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            background: rgb(0, 12, 24);
+        }
+
+        #container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: blueviolet;
+            font-size: medium;
+        }
+#container2 {
+            width: 100%;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: blueviolet;
+            font-size: medium;
+        }
+        .row {
+            color: white;
+            display: flex;
+            width: 20em;
+            height: 20vh;
+        }
+
+        .boxes {
+            height: 20vh;
+            width: 100%;
+            background: rgb(64, 35, 132);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid black;
+            font-size: 10vh;
+            text-shadow: 1px 1px 0 blue,
+                -1px 1px 0 blueviolet,
+                -1px -1px 0 rgb(47, 16, 77),
+                1px -1px 0 rgb(50, 95, 255);
+            color: black;
+
+        }
+
+        #winner {
+            margin-top: 5vh;
+            color: blueviolet;
+        }
+
+        h1 {
+            color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            text-shadow: 1px 1px 0 blue,
+                -1px 1px 0 blueviolet,
+                -1px -1px 0 rgb(47, 16, 77),
+                1px -1px 0 rgb(50, 95, 255);
+            font-weight: 99;
+            font-size: 3em;
+            color: black;
+
+        }
+        button{
+            border: none;
+            border-radius: 11px;
+            padding:3vh;
+            background: blueviolet;
+            box-shadow: 0 0 10px blueviolet,
+            0 0 20px blueviolet;
+display:flex;
+
+  }
+    </style>
+</head>
+
+<body>
+    <h1>Tic Tac Toe</h1>
+<div id="container2">
+    <button onclick = "window.location.reload()">reload</button>
+</div>
+    <div id="container">
+        <div class="row">
+            <div id="n0" class="boxes" onclick="Play(0)"></div>
+            <div id="n1" class="boxes" onclick="Play(1)"></div>
+            <div id="n2" class="boxes" onclick="Play(2)"></div>
+        </div>
+        <div class="row">
+            <div id="n3" class="boxes" onclick="Play(3)"></div>
+            <div id="n4" class="boxes" onclick="Play(4)"></div>
+            <div id="n5" class="boxes" onclick="Play(5)"></div>
+        </div>
+        <div class="row">
+            <div id="n6" class="boxes" onclick="Play(6)"></div>
+            <div id="n7" class="boxes" onclick="Play(7)"></div>
+            <div id="n8" class="boxes" onclick="Play(8)"></div>
+        </div>
+        <div id="winner">It's player X turn</div>
+    </div>
+    <script>
+
+        const wins = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // cols
+            [0, 4, 8], [2, 4, 6]             // diagonals
+        ];
+        let turn = "X"
+        let count = 0
+
+        let boxes = []
+        for (let i = 0; i < 9; i++) {
+            let divElement = document.getElementById(`n${i}`)
+            boxes.push(divElement)
+        }
+        console.log(boxes);
+
+        const Play = (val) => {
+            let winner = document.getElementById("winner")
+
+
+
+            boxes[val].innerText = turn
+            count++
+            clickedbox = document.getElementById(`n${val}`)
+            clickedbox.onclick = null
+            turn = (turn == "X") ? "O" : "X"
+
+            //winner logic
+            for (let pattern of wins) {
+                let [a, b, c] = pattern
+                if (
+                    boxes[a].innerText &&
+                    boxes[a].innerText === boxes[b].innerText &&
+                    boxes[a].innerText === boxes[c].innerText
+                ) {
+                    boxes[a].style.background = "rgb(255, 17, 17)"
+                    boxes[b].style.background = "rgb(255, 17, 17)"
+                    boxes[c].style.background = "rgb(255, 17, 17)"
+                    turn = (turn == "X") ? "O" : "X"
+                    winner.innerText = `player ${turn} Wins 🏆`
+                proceed()
+
+                    for (let i = 0; i < 9; i++) {
+                        boxes[i].onclick = null
+                    }
+                    return
+
+                }
+
+            }
+            let text = (turn == "X") ? "It's Player X turn" : "It's Player O turn"
+            winner.innerText = text
+            if (count >= 9) {
+                winner.innerText = "It's a draw 😅"
+                alert("It's a draw")
+                proceed()
+            }
+        }
+       const proceed = () =>{
+document.getElementById("container").style.display = "none"
+document.getElementById("container2").style.display = "flex"
+
+       }
+
+    </script>
+</body>
+
+</html>
